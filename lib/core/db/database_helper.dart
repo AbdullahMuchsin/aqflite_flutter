@@ -1,17 +1,19 @@
-import 'package:sqflite/sqflite.dart';
+import 'package:learn_sqflite/core/db/tables/category_table.dart';
+import 'package:learn_sqflite/core/db/tables/note_table.dart';
+import 'package:learn_sqflite/core/db/tables/user_table.dart';
 import 'package:path/path.dart';
-import 'tables/user_table.dart';
-import 'tables/note_table.dart';
-import 'tables/category_table.dart';
+import 'package:sqflite/sqflite.dart';
 
 class DatabaseHelper {
   static Database? _database;
 
   static Future<Database> get database async {
-    if (_database != null) return _database!;
+    if (_database != null) {
+      return _database!;
+    }
 
     final dbPath = await getDatabasesPath();
-    final path = join(dbPath, 'app_database.db');
+    final path = join(dbPath, "app_database.db");
 
     _database = await openDatabase(
       path,
@@ -29,7 +31,7 @@ class DatabaseHelper {
   static Future close() async {
     final db = _database;
     if (db != null) {
-      await db.close();
+      db.close();
     }
   }
 }
