@@ -1,5 +1,5 @@
-class Users {
-  final int? idUsers;
+class User {
+  final int? idUser;
   final String? name;
   final String? email;
   final String? password;
@@ -7,8 +7,8 @@ class Users {
   final DateTime? createdAt;
   final DateTime? updatedAt;
 
-  Users({
-    required this.idUsers,
+  User({
+    required this.idUser,
     required this.name,
     required this.email,
     required this.password,
@@ -17,9 +17,9 @@ class Users {
     required this.updatedAt,
   });
 
-  factory Users.fromJson(Map<String, dynamic> json) {
-    return Users(
-      idUsers:
+  factory User.fromJson(Map<String, dynamic> json) {
+    return User(
+      idUser:
           json['id_users'] != null
               ? int.tryParse(json['id_users'].toString())
               : null,
@@ -40,13 +40,25 @@ class Users {
 
   Map<String, dynamic> toJson() {
     return {
-      'id_users': idUsers?.toString(),
+      'id_users': idUser?.toString(),
       'name': name,
       'email': email,
       'password': password,
       'role': role,
       'created_at': createdAt?.toIso8601String(),
       'updated_at': updatedAt?.toIso8601String(),
+    };
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id_users': idUser,
+      'name': name,
+      'email': email,
+      'password': password,
+      'role': role,
+      'created_at': createdAt?.millisecondsSinceEpoch,
+      'updated_at': updatedAt?.millisecondsSinceEpoch,
     };
   }
 }

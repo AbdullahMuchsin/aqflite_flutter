@@ -8,7 +8,7 @@ import 'package:sqflite/sqflite.dart';
 class DatabaseHelper {
   static Database? _database;
 
-  Future<Database> get database async {
+  static Future<Database> get database async {
     if (_database != null) _database;
 
     final dbPath = await getDatabasesPath();
@@ -28,7 +28,7 @@ class DatabaseHelper {
     return _database!;
   }
 
-  Future close() async {
+  static Future close() async {
     if (_database != null) {
       final db = await database;
       await db.close();
