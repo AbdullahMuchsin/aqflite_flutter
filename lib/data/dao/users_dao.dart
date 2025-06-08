@@ -9,7 +9,7 @@ class UsersDao {
   Future<List<User>> getAllUsers() async {
     final db = await _db;
 
-    final maps = await db.query("users");
+    final maps = await db.query(UsersTable.tableName);
     return List.generate(maps.length, (index) => User.fromJson(maps[index]));
   }
 
