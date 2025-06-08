@@ -9,7 +9,7 @@ class DevicesDao {
   Future<List<Device>> getAllDevices() async {
     final db = await _db;
     final maps = await db.query(DevicesTable.tableName);
-    return List.generate(maps.length, (index) => Device.fromJson(maps[index]));
+    return List.generate(maps.length, (index) => Device.fromMap(maps[index]));
   }
 
   Future<int> addDevice(Device device) async {

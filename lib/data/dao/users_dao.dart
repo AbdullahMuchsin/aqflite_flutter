@@ -10,7 +10,7 @@ class UsersDao {
     final db = await _db;
 
     final maps = await db.query(UsersTable.tableName);
-    return List.generate(maps.length, (index) => User.fromJson(maps[index]));
+    return List.generate(maps.length, (index) => User.fromMap(maps[index]));
   }
 
   Future<int> addUser(User user) async {
@@ -21,7 +21,7 @@ class UsersDao {
   Future<int> updateUser(User user) async {
     final db = await _db;
     return await db.update(
-      "users",
+      UsersTable.tableName,
       user.toMap(),
       where: "id = ?",
       whereArgs: [user.idUser],
@@ -30,6 +30,10 @@ class UsersDao {
 
   Future<int> deleteUser(int idUser) async {
     final db = await _db;
-    return await db.delete('users', where: "id = ?", whereArgs: [idUser]);
+    return await db.delete(
+      UsersTable.tableName,
+      where: "id = ?",
+      whereArgs: [idUser],
+    );
   }
 }

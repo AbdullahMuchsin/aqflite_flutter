@@ -8,15 +8,16 @@ class User {
   final DateTime? updatedAt;
 
   User({
-    required this.idUser,
-    required this.name,
-    required this.email,
-    required this.password,
-    required this.role,
-    required this.createdAt,
-    required this.updatedAt,
+    this.idUser,
+    this.name,
+    this.email,
+    this.password,
+    this.role,
+    this.createdAt,
+    this.updatedAt,
   });
 
+  // Dari JSON (biasanya dari API)
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
       idUser:
@@ -38,9 +39,10 @@ class User {
     );
   }
 
+  // Ke JSON (untuk dikirim ke API)
   Map<String, dynamic> toJson() {
     return {
-      'id_users': idUser?.toString(),
+      'id_users': idUser,
       'name': name,
       'email': email,
       'password': password,
@@ -50,6 +52,30 @@ class User {
     };
   }
 
+  // Dari Map (biasanya dari SQLite)
+  factory User.fromMap(Map<String, dynamic> map) {
+    return User(
+      idUser: map['id_users'] as int?,
+      name: map['name'] as String?,
+      email: map['email'] as String?,
+      password: map['password'] as String?,
+      role: map['role'] as String?,
+      createdAt:
+          map['created_at'] != null
+              ? (map['created_at'] is int
+                  ? DateTime.fromMillisecondsSinceEpoch(map['created_at'])
+                  : DateTime.tryParse(map['created_at'].toString()))
+              : null,
+      updatedAt:
+          map['updated_at'] != null
+              ? (map['updated_at'] is int
+                  ? DateTime.fromMillisecondsSinceEpoch(map['updated_at'])
+                  : DateTime.tryParse(map['updated_at'].toString()))
+              : null,
+    );
+  }
+
+  // Ke Map (untuk disimpan di SQLite)
   Map<String, dynamic> toMap() {
     return {
       'id_users': idUser,
