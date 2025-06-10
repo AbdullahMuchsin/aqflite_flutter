@@ -12,12 +12,12 @@ class SensorDao {
     return List.generate(maps.length, (index) => Sensor.fromMap(maps[index]));
   }
 
-  Future<int> addUser(Sensor user) async {
+  Future<int> addSensor(Sensor sensor) async {
     final db = await _db;
-    return await db.insert(SensorTable.tableName, user.toMap());
+    return await db.insert(SensorTable.tableName, sensor.toMap());
   }
 
-  Future<int> updateUser(Sensor sensor) async {
+  Future<int> updateSensor(Sensor sensor) async {
     final db = await _db;
     return await db.update(
       SensorTable.tableName,
@@ -27,7 +27,7 @@ class SensorDao {
     );
   }
 
-  Future<int> deleteUser(int idSensor) async {
+  Future<int> deleteSensor(int idSensor) async {
     final db = await _db;
     return await db.delete(
       SensorTable.tableName,

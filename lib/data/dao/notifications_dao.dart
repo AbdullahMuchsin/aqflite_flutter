@@ -6,7 +6,7 @@ import 'package:sqflite/sqflite.dart';
 class NotificationsDao {
   Future<Database> get _db async => DatabaseHelper.database;
 
-  Future<List<NotificationModel>> getAllSensor() async {
+  Future<List<NotificationModel>> getAllNotifications() async {
     final db = await _db;
     final maps = await db.query(NotificationsTable.tableName);
     return List.generate(
@@ -15,12 +15,12 @@ class NotificationsDao {
     );
   }
 
-  Future<int> addUser(NotificationModel user) async {
+  Future<int> addNotification(NotificationModel notification) async {
     final db = await _db;
-    return await db.insert(NotificationsTable.tableName, user.toMap());
+    return await db.insert(NotificationsTable.tableName, notification.toMap());
   }
 
-  Future<int> updateUser(NotificationModel notification) async {
+  Future<int> updateNotification(NotificationModel notification) async {
     final db = await _db;
     return await db.update(
       NotificationsTable.tableName,
@@ -30,7 +30,7 @@ class NotificationsDao {
     );
   }
 
-  Future<int> deleteUser(int idNotification) async {
+  Future<int> deleteNotification(int idNotification) async {
     final db = await _db;
     return await db.delete(
       NotificationsTable.tableName,
