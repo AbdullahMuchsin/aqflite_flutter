@@ -5,4 +5,6 @@ abstract class SensorRepository {
   Future<int> updateSensor(Sensor sensor);
   Future<int> addSensor(Sensor sensor);
   Future<int> deleteSensor(int idUser);
+
+  Future<Sensor?> getLatestMoisture();
 }

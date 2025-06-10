@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:learn_sqflite/presentation/viewmodels/sensor_viewmodel.dart';
 import 'package:provider/provider.dart';
 
 import 'routes.dart';
@@ -9,7 +10,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [],
+      providers: [ChangeNotifierProvider(create: (_) => SensorViewModel())],
       child: MaterialApp(
         title: 'My MVVM App',
         debugShowCheckedModeBanner: false,

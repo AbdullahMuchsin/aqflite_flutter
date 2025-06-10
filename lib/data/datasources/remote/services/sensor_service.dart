@@ -8,7 +8,7 @@ class SensorService {
   Future<Sensor?> fetchLatestMoisture() async {
     try {
       final response = await http.get(
-        Uri.parse("${AppConstant.ApiServerUrl}api/moisture"),
+        Uri.parse("${AppConstant.ApiServerUrl}moisture/latest"),
       );
 
       if (response.statusCode == 200) {
